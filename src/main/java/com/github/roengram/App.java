@@ -13,16 +13,13 @@ public class App
 		int maxfork = Integer.parseInt(args[1]);
 		int forknum = Integer.parseInt(args[2]);
 		int intv = Integer.parseInt(args[3]);
-		String[] cmdarr = new String[16];
-		for (int i=4 ; i<args.length ; i++) {
-		    cmdarr[i-4] = args[i];
-        }
+		String cmd = args[4];
         char[] buf = new char [mem*1024*1024];
         try {
 			for (int i=0 ; i<maxfork ; i++) {
-			    for (int j=9 ; j<forknum ; j++) {
-                    Process p = Runtime.getRuntime().exec(cmdarr, null, null);
-                    System.out.printf("\"%s\" process %d is created\n", cmdarr[0], i);
+			    for (int j=0 ; j<forknum ; j++) {
+                    Process p = Runtime.getRuntime().exec(cmd, null, null);
+                    System.out.printf("\"%s\" process %d-%d is created\n", cmd, i, j);
                     p.waitFor(9999, TimeUnit.SECONDS);
 			    }
 				Thread.sleep(intv);
